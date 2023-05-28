@@ -47,7 +47,7 @@ public class CustimAdapterSubject extends RecyclerView.Adapter<CustimAdapterSubj
             @Override
             public void onClick(View view) {
 
-                listener.onItemDeleteClick(data.get(holder.getItemViewType()).getId(), holder.getAdapterPosition());
+                listener.onItemDeleteClick(data.get(holder.getAdapterPosition()).getId(), holder.getAdapterPosition());
             }
         });
     }

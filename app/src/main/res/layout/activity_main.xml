@@ -31,17 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et3"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_marginTop="@dimen/_152sdp"
-        android:background="@drawable/menio1"
-        android:hint="البريد الالكتروني"
-        android:padding="@dimen/_15sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
 
@@ -49,16 +38,16 @@
         android:id="@+id/et2"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_50sdp"
-        android:layout_marginTop="@dimen/_230sdp"
+        android:layout_marginTop="228dp"
         android:background="@drawable/menio1"
         android:hint="كلمة المرور"
         android:padding="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioButton
+    <CheckBox
             android:id="@+id/Rb1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -29,12 +29,19 @@ public class Home extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        recyclerView =   findViewById(R.id.recaicle);
+        recyclerView = findViewById(R.id.recaicle);
 
         String userName = getIntent().getStringExtra("userName");
         String email = getIntent().getStringExtra("email");
         binding.tv7.setText(userName);
         binding.tv8.setText(email);
+
+        dbHelper = new DbHelper(this); // تهيئة الكائن DbHelper
+
+        boolean rememberMeEnabled = dbHelper.isRememberMeEnabled(userName);
+        if (rememberMeEnabled) {
+            // استرداد البيانات المطلوبة وعرضها في واجهة المستخدم
+        }
 
         binding.ll1.setOnClickListener(new View.OnClickListener() {
             @Override

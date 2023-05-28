@@ -1,5 +1,6 @@
 package com.example.projectandroid.modail;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -11,21 +12,77 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class DbHelper extends SQLiteOpenHelper {
+
+
     public DbHelper(@Nullable Context context) {
-        super(context, "SUBJECT", null, 1);
+        super(context, "DATABASE", null, 1);
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(Supject.CREATE_TABLE);
+        sqLiteDatabase.execSQL(Accounts.CREATE_TABLE);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Accounts.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Supject.TABLE_NAME);
-
         onCreate(sqLiteDatabase);
+    }
+    public boolean createAccount(String username, String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Accounts.COL_USERNAME, username);
+        values.put(Accounts.COL_EMAIL, email);
+        values.put(Accounts.COL_PASSWORD, password);
+        long rowId = db.insert(Accounts.TABLE_NAME, null, values);
+        return rowId != -1;
+    }
+
+    public boolean checkCredentials(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = Accounts.COL_USERNAME + " = ? AND " + Accounts.COL_PASSWORD + " = ?";
+        String[] selectionArgs = {username, password};
+        Cursor cursor = db.query(
+                Accounts.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+        boolean hasValidCredentials = cursor.getCount() > 0;
+        cursor.close();
+        return hasValidCredentials;
+    }
+
+
+    public void updateRememberMeStatus(String username, boolean rememberMe) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Accounts.COL_REMEMBER_ME, rememberMe ? 1 : 0);
+        String selection = Accounts.COL_USERNAME + " = ?";
+        String[] selectionArgs = {username};
+        db.update(Accounts.TABLE_NAME, values, selection, selectionArgs);
+    }
+
+    public boolean isRememberMeEnabled(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {Accounts.COL_REMEMBER_ME};
+        String selection = Accounts.COL_USERNAME + " = ?";
+        String[] selectionArgs = {username};
+        Cursor cursor = db.query(Accounts.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        boolean result = false;
+        if (cursor.moveToFirst()) {
+            @SuppressLint("Range") int rememberMeValue = cursor.getInt(cursor.getColumnIndex(Accounts.COL_REMEMBER_ME));
+            result = (rememberMeValue == 1);
+        }
+        cursor.close();
+        return result;
     }
     public  boolean insertSubject(String subject){
         SQLiteDatabase aa = getWritableDatabase();

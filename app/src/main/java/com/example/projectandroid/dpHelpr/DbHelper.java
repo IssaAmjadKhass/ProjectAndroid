@@ -87,6 +87,45 @@ public class DbHelper extends SQLiteOpenHelper {
 //        cursor.close();
 //        return result;
 //    }
+public String getUserName() {
+    SQLiteDatabase db = this.getReadableDatabase();
+    String[] columns = {Accounts.COL_USERNAME};
+    Cursor cursor = db.query(
+            Accounts.TABLE_NAME,
+            columns,
+            null,
+            null,
+            null,
+            null,
+            null
+    );
+    String username = "";
+    if (cursor.moveToFirst()) {
+        username = cursor.getString(cursor.getColumnIndexOrThrow(Accounts.COL_USERNAME));
+    }
+    cursor.close();
+    return username;
+}
+
+    public String getEmail() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {Accounts.COL_EMAIL};
+        Cursor cursor = db.query(
+                Accounts.TABLE_NAME,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        String email = "";
+        if (cursor.moveToFirst()) {
+            email = cursor.getString(cursor.getColumnIndexOrThrow(Accounts.COL_EMAIL));
+        }
+        cursor.close();
+        return email;
+    }
 
     public boolean insertSubject(String subject) {
         SQLiteDatabase aa = getWritableDatabase();
@@ -156,6 +195,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         return data;
     }
+
 
 
 }

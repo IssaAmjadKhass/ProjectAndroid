@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.projectandroid.databinding.ActivityHomeBinding;
 import com.example.projectandroid.dpHelpr.DbHelper;
@@ -32,8 +33,10 @@ public class Home extends AppCompatActivity {
 
         String userName = getIntent().getStringExtra("userName");
         String email = getIntent().getStringExtra("email");
-        binding.tv7.setText(userName);
-        binding.tv8.setText(email);
+        TextView userNameTextView = findViewById(R.id.username);
+        TextView emailTextView = findViewById(R.id.email);
+        binding.username.setText(userNameTextView.getText());
+        binding.email.setText(emailTextView.getText());
 
         dbHelper = new DbHelper(this); // تهيئة الكائن DbHelper
 
@@ -50,7 +53,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        binding.ll2.setOnClickListener(new View.OnClickListener() {
+        binding.AddSupject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

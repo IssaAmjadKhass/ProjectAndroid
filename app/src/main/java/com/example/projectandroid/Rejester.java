@@ -1,6 +1,8 @@
 package com.example.projectandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -19,6 +21,7 @@ public class Rejester extends AppCompatActivity {
         databaseHelper = new DbHelper(this);
 
         binding.bt2.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String userName = binding.et1.getText().toString();
@@ -42,6 +45,10 @@ public class Rejester extends AppCompatActivity {
 
                 boolean isAccountCreated = databaseHelper.createAccount(userName, email, password);
                 if (isAccountCreated) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("userName", userName); // استبدل userName بالمتغير الذي يحتوي على اسم المستخدم
+                    intent.putExtra("email", email); // استبدل email بالمتغير الذي يحتوي على البريد الإلكتروني
+                    startActivity(intent);
                     finish();
                 } else {
                     binding.et1.setError("Username already exists");

@@ -7,7 +7,6 @@ public class Accounts {
     private String email;
     private int password;
 
-
     private static final String DATABASE_NAME = "UserAccounts.db";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_NAME = "accounts";
@@ -16,14 +15,12 @@ public class Accounts {
     public static final String COL_EMAIL = "email";
     public static final String COL_PASSWORD = "password";
 
-
-    public static final String CREATE_TABLE = " CREATE TABLE IF NOT EXISTS " + TABLE_NAME
+    public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
             + "(" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COL_USERNAME + " TEXT,"
             + COL_EMAIL + " TEXT,"
             + COL_PASSWORD + " TEXT,"
             + COL_REMEMBER_ME + " INTEGER DEFAULT 0)";
-
 
     public Accounts(int id, String userName, String email, int password) {
         this.id = id;
@@ -36,25 +33,31 @@ public class Accounts {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getUserName() {
         return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getPassword() {
         return password;
     }
 
-    @Override
-    public String toString() {
-        return "Log_in{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", password=" + password +
-                '}';
+    public void setPassword(int password) {
+        this.password = password;
     }
 }

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.projectandroid.modail.Supject;
+
 import java.util.ArrayList;
 
 public class CustemAdapterMonth extends BaseAdapter {
@@ -39,5 +41,7 @@ public class CustemAdapterMonth extends BaseAdapter {
        TextView  name = view1.findViewById(R.id.tv_month);
        name.setText(data.get(i).getMonth());
         return view1;
+
     }
+
 }

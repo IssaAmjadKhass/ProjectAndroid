@@ -60,7 +60,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv7"
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -72,7 +72,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/tv8"
+            android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -85,7 +85,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll2"
+        android:id="@+id/AddSupject"
         android:layout_width="@dimen/_115sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginBottom="148dp"
@@ -135,7 +135,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll3"
+        android:id="@+id/AddStudent"
         android:layout_width="@dimen/_115sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginBottom="84dp"

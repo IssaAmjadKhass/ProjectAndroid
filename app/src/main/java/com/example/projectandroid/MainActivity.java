@@ -30,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (preferences.getBoolean("ddd", false)) {
             Intent intent = new Intent(getApplicationContext(), Home.class);
-
             startActivity(intent);
-
 
         }
 
@@ -64,8 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 if (isCredentialsValid) {
                     rememberMe = binding.Rb1.isChecked();
                     preferences.edit().putBoolean("ddd", rememberMe).apply();
+
+                    String email = databaseHelper.getEmail();
+
                     Intent intent = new Intent(getApplicationContext(), Home.class);
-                    intent.putExtra("userName", userName);
+                    intent.putExtra("userName", getIntent().getStringExtra("userName"));
+                    intent.putExtra("email", getIntent().getStringExtra("email"));
                     startActivity(intent);
                     finish();
                 } else {

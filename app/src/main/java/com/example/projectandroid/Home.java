@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.projectandroid.adapter.CustimAdapterSubject;
 import com.example.projectandroid.databinding.ActivityHomeBinding;
 import com.example.projectandroid.dpHelpr.DbHelper;
 import com.example.projectandroid.modail.Supject;

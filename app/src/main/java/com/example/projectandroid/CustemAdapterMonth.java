@@ -1,4 +1,4 @@
-package com.example.projectandroid.adapter;
+package com.example.projectandroid;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import com.example.projectandroid.Month1;
-import com.example.projectandroid.R;
 
 import java.util.ArrayList;
 

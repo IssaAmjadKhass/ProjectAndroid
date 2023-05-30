@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.projectandroid.databinding.ActivityRejesterBinding;
-import com.example.projectandroid.modail.DbHelper;
+import com.example.projectandroid.dpHelpr.DbHelper;
 
 public class Rejester extends AppCompatActivity {
     ActivityRejesterBinding binding;
@@ -16,7 +16,6 @@ public class Rejester extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRejesterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         databaseHelper = new DbHelper(this);
 
         binding.bt2.setOnClickListener(new View.OnClickListener() {

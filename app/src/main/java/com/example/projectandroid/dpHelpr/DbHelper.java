@@ -1,4 +1,4 @@
-package com.example.projectandroid.modail;
+package com.example.projectandroid.dpHelpr;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -9,10 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.projectandroid.modail.Accounts;
+import com.example.projectandroid.modail.Supject;
+
 import java.util.ArrayList;
 
 public class DbHelper extends SQLiteOpenHelper {
-
 
     public DbHelper(@Nullable Context context) {
         super(context, "DATABASE", null, 1);
@@ -32,6 +34,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Supject.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
+
     public boolean createAccount(String username, String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -39,7 +42,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(Accounts.COL_EMAIL, email);
         values.put(Accounts.COL_PASSWORD, password);
         long rowId = db.insert(Accounts.TABLE_NAME, null, values);
-        return rowId != -1;
+        return rowId > 0;
     }
 
     public boolean checkCredentials(String username, String password) {
@@ -84,78 +87,75 @@ public class DbHelper extends SQLiteOpenHelper {
         cursor.close();
         return result;
     }
-    public  boolean insertSubject(String subject){
+
+    public boolean insertSubject(String subject) {
         SQLiteDatabase aa = getWritableDatabase();
         ContentValues dp = new ContentValues();
 
         dp.put(Supject.COL_SUBJECT, String.valueOf(subject));
 
-        long rew =  aa.insert(Supject.TABLE_NAME,null , dp);
+        long rew = aa.insert(Supject.TABLE_NAME, null, dp);
 
 
-        return rew>0 ;
+        return rew > 0;
     }
 
-    public  boolean updateSubject(String id , String subject ){
+    public boolean updateSubject(String id, String subject) {
         SQLiteDatabase aa = getWritableDatabase();
         ContentValues dp = new ContentValues();
         dp.put(Supject.COL_SUBJECT, String.valueOf(subject));
 
-        int rowId = aa.update(Supject.TABLE_NAME, dp , Supject.COL_ID +"=?" ,new String [] {id});
-        return rowId>0;
+        int rowId = aa.update(Supject.TABLE_NAME, dp, Supject.COL_ID + "=?", new String[]{id});
+        return rowId > 0;
     }
-    public  boolean deleteSubject(String id)
-    {
+
+    public boolean deleteSubject(String id) {
         SQLiteDatabase dp = getWritableDatabase();
-        int rowId =  dp.delete(Supject.TABLE_NAME,Supject.COL_ID+"=?",new String[]{id});
-        return rowId>0;
+        int rowId = dp.delete(Supject.TABLE_NAME, Supject.COL_ID + "=?", new String[]{id});
+        return rowId > 0;
     }
-    public ArrayList<Supject>getAllSubject() {
+
+    public ArrayList<Supject> getAllSubject() {
         SQLiteDatabase dp = getReadableDatabase();
-        ArrayList<Supject>data=new ArrayList<>();
-        String qouery = "SELECT * FROM "+Supject.TABLE_NAME+" ORDER BY "+Supject.COL_ID+" DESC";
-        Cursor cursor = dp.rawQuery(qouery,null);
+        ArrayList<Supject> data = new ArrayList<>();
+        String qouery = "SELECT * FROM " + Supject.TABLE_NAME + " ORDER BY " + Supject.COL_ID + " DESC";
+        Cursor cursor = dp.rawQuery(qouery, null);
         if (cursor.moveToFirst()) {
 
             do {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(Supject.COL_ID));
                 String title = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_SUBJECT));
 
-                String time  = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_TIME));
-                Supject supject = new Supject(id,title,time);
+                String time = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_TIME));
+                Supject supject = new Supject(id, title, time);
                 data.add(supject);
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
             cursor.close();
 
         }
         return data;
     }
-    public ArrayList<Supject>getAllSubjectByTitle(String titleText) {
+
+    public ArrayList<Supject> getAllSubjectByTitle(String titleText) {
         SQLiteDatabase dp = getReadableDatabase();
-        ArrayList<Supject>data=new ArrayList<>();
-        String qouery = "SELECT * FROM "+Supject.TABLE_NAME+" WHERE "+ Supject.COL_SUBJECT+" LIKE '%' || ? || '%' ";
-        Cursor cursor = dp.rawQuery(qouery,new String[]{titleText});
+        ArrayList<Supject> data = new ArrayList<>();
+        String qouery = "SELECT * FROM " + Supject.TABLE_NAME + " WHERE " + Supject.COL_SUBJECT + " LIKE '%' || ? || '%' ";
+        Cursor cursor = dp.rawQuery(qouery, new String[]{titleText});
         if (cursor.moveToFirst()) {
 
             do {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(Supject.COL_ID));
                 String title = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_SUBJECT));
 
-                String time  = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_TIME));
-                Supject notes = new Supject(id,title,time);
+                String time = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_TIME));
+                Supject notes = new Supject(id, title, time);
                 data.add(notes);
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
             cursor.close();
 
         }
         return data;
     }
-
-
-
-
-
-
 
 
 }

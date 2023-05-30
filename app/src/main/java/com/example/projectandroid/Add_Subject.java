@@ -1,19 +1,14 @@
 package com.example.projectandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.projectandroid.databinding.ActivityAddSubjectBinding;
-import com.example.projectandroid.modail.DbHelper;
+import com.example.projectandroid.dpHelpr.DbHelper;
 import com.example.projectandroid.modail.Supject;
-
-import java.util.ArrayList;
 
 public class Add_Subject extends AppCompatActivity {
     ActivityAddSubjectBinding binding;

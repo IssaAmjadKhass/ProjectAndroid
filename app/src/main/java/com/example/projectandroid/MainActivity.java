@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.example.projectandroid.databinding.ActivityMainBinding;
-import com.example.projectandroid.modail.DbHelper;
+import com.example.projectandroid.dpHelpr.DbHelper;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;

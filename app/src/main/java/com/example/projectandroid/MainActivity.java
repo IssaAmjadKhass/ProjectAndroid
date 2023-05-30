@@ -1,7 +1,10 @@
 package com.example.projectandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -14,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private DbHelper databaseHelper;
     private boolean rememberMe;
 
+    SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         databaseHelper = new DbHelper(this);
+        preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+
+        if (preferences.getBoolean("ddd", false)) {
+            Intent intent = new Intent(getApplicationContext(), Home.class);
+
+            startActivity(intent);
+
+
+        }
 
         binding.tv1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean isCredentialsValid = databaseHelper.checkCredentials(userName, password);
                 if (isCredentialsValid) {
                     rememberMe = binding.Rb1.isChecked();
-                    databaseHelper.updateRememberMeStatus(userName, rememberMe);
-
+                    preferences.edit().putBoolean("ddd", rememberMe).apply();
                     Intent intent = new Intent(getApplicationContext(), Home.class);
                     intent.putExtra("userName", userName);
                     startActivity(intent);

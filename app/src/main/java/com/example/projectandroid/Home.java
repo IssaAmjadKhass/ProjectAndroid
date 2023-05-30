@@ -37,10 +37,10 @@ public class Home extends AppCompatActivity {
 
         dbHelper = new DbHelper(this); // تهيئة الكائن DbHelper
 
-        boolean rememberMeEnabled = dbHelper.isRememberMeEnabled(userName);
-        if (rememberMeEnabled) {
-            // استرداد البيانات المطلوبة وعرضها في واجهة المستخدم
-        }
+//        boolean rememberMeEnabled = dbHelper.isRememberMeEnabled(userName);
+//        if (rememberMeEnabled) {
+//            // استرداد البيانات المطلوبة وعرضها في واجهة المستخدم
+//        }
 
         binding.ll1.setOnClickListener(new View.OnClickListener() {
             @Override

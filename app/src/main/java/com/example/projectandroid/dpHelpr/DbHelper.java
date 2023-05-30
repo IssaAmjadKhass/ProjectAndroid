@@ -73,20 +73,20 @@ public class DbHelper extends SQLiteOpenHelper {
         db.update(Accounts.TABLE_NAME, values, selection, selectionArgs);
     }
 
-    public boolean isRememberMeEnabled(String username) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {Accounts.COL_REMEMBER_ME};
-        String selection = Accounts.COL_USERNAME + " = ?";
-        String[] selectionArgs = {username};
-        Cursor cursor = db.query(Accounts.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
-        boolean result = false;
-        if (cursor.moveToFirst()) {
-            @SuppressLint("Range") int rememberMeValue = cursor.getInt(cursor.getColumnIndex(Accounts.COL_REMEMBER_ME));
-            result = (rememberMeValue == 1);
-        }
-        cursor.close();
-        return result;
-    }
+//    public boolean isRememberMeEnabled(String username) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String[] columns = {Accounts.COL_REMEMBER_ME};
+//        String selection = Accounts.COL_USERNAME + " = ?";
+//        String[] selectionArgs = {username};
+//        Cursor cursor = db.query(Accounts.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+//        boolean result = false;
+//        if (cursor.moveToFirst()) {
+//            @SuppressLint("Range") int rememberMeValue = cursor.getInt(cursor.getColumnIndex(Accounts.COL_REMEMBER_ME));
+//            result = (rememberMeValue == 1);
+//        }
+//        cursor.close();
+//        return result;
+//    }
 
     public boolean insertSubject(String subject) {
         SQLiteDatabase aa = getWritableDatabase();

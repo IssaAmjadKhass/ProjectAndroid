@@ -90,6 +90,16 @@ public class DbHelper extends SQLiteOpenHelper {
 //        cursor.close();
 //        return result;
 //    }
+
+    public boolean createOrUpdateAccount(String username, String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Accounts.COL_USERNAME, username);
+        values.put(Accounts.COL_EMAIL, email);
+        values.put(Accounts.COL_PASSWORD, password);
+        long rowId = db.insertWithOnConflict(Accounts.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+        return rowId != -1;
+    }
 public String getUserName() {
     SQLiteDatabase db = this.getReadableDatabase();
     String[] columns = {Accounts.COL_USERNAME};

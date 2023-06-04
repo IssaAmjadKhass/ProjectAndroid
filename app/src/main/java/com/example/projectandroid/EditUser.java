@@ -8,9 +8,11 @@ import android.util.Patterns;
 import android.view.View;
 
 import com.example.projectandroid.databinding.ActivityEditUserBinding;
+import com.example.projectandroid.dpHelpr.DbHelper;
 
 public class EditUser extends AppCompatActivity {
     boolean isinf = true;
+    DbHelper dbHelper;
 ActivityEditUserBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,38 +27,37 @@ ActivityEditUserBinding binding;
                 String email = binding.et2.getText().toString();
                 String password = binding.et3.getText().toString();
                 isinf = true;
-                if (userName.length() == 0) {
-                    binding.et1.setError(" not Empty ");
-                    isinf= false;  }
 
+                if (userName.length() == 0) {
+                    binding.et1.setError("Username cannot be empty");
+                    isinf = false;
+                }
 
                 if (email.length() == 0) {
-                    binding.et2.setError("notEmpty");
+                    binding.et2.setError("Email cannot be empty");
                     isinf = false;
-
-                }  else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                        binding.et2.setError("اكتب صيغة الايميل بشكل صحيح");
-                        isinf = false;
-                    }
-
-
-
-
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    binding.et2.setError("Invalid email format");
+                    isinf = false;
+                }
 
                 if (password.length() == 0) {
-
-                    binding.et3.setError("notEmpty");
+                    binding.et3.setError("Password cannot be empty");
                     isinf = false;
                 }
 
-                if (isinf)
-                {
-                    Intent intent = new Intent(getApplicationContext(),Home.class);
-                    intent.putExtra("userName",userName);
-                    intent.putExtra("email",email);
-                    startActivity(intent);
+                if (isinf) {
+                    DbHelper dbHelper = new DbHelper(getApplicationContext());
+                    boolean isSuccess = dbHelper.createOrUpdateAccount(userName, email, password);
+                    if (isSuccess) {
+                        Intent intent = new Intent(getApplicationContext(), Home.class);
+                        intent.putExtra("userName", userName);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
+                    } else {
+                        // Handle account creation or update failure
+                    }
                 }
-
             }
         });
     }

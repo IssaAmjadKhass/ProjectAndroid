@@ -14,6 +14,7 @@ import com.example.projectandroid.modail.Supject;
 import java.util.ArrayList;
 
 public class CustmAdabterStudent extends RecyclerView.Adapter<CustmAdabterStudent.MyHolder> {
+
     Context context;
     ArrayList<Supject>data;
 

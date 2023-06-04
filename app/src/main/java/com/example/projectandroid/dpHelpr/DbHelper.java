@@ -10,9 +10,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.projectandroid.modail.Accounts;
+import com.example.projectandroid.modail.Student;
 import com.example.projectandroid.modail.Supject;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -25,6 +29,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(Supject.CREATE_TABLE);
         sqLiteDatabase.execSQL(Accounts.CREATE_TABLE);
+        sqLiteDatabase.execSQL(Student.CREATE_TABLE);
 
     }
 
@@ -32,8 +37,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Accounts.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Supject.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Student.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
+
 
     public boolean createAccount(String username, String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -175,26 +182,48 @@ public String getUserName() {
         return data;
     }
 
-    public ArrayList<Supject> getAllSubjectByTitle(String titleText) {
-        SQLiteDatabase dp = getReadableDatabase();
-        ArrayList<Supject> data = new ArrayList<>();
-        String qouery = "SELECT * FROM " + Supject.TABLE_NAME + " WHERE " + Supject.COL_SUBJECT + " LIKE '%' || ? || '%' ";
-        Cursor cursor = dp.rawQuery(qouery, new String[]{titleText});
-        if (cursor.moveToFirst()) {
 
-            do {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow(Supject.COL_ID));
-                String title = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_SUBJECT));
 
-                String time = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_TIME));
-                Supject notes = new Supject(id, title, time);
-                data.add(notes);
-            } while (cursor.moveToNext());
-            cursor.close();
+    public boolean insertStudent(Student student) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Student.COL_NAME, student.getName());
+        values.put(Student.COL_FAMILY, student.getFamily());
+        values.put(Student.COL_DATAOFBIRTH, student.getDateofbirth());
 
-        }
-        return data;
+        long rowId = db.insert(Student.TABLE_NAME, null, values);
+
+        return rowId >0;
     }
+
+    public ArrayList<Student> getAllStudents (String name1) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Student> students = new ArrayList<>();
+        String query = "SELECT * FROM " + Student.TABLE_NAME +" WHERE " + Supject.COL_SUBJECT + " LIKE '%' || ? || '%' ";
+        Cursor cursor = db.rawQuery(query,  new String[]{name1});
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(Student.COL_ID));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(Student.COL_NAME));
+                String family = cursor.getString(cursor.getColumnIndexOrThrow(Student.COL_FAMILY));
+                String dateOfBirth = cursor.getString(cursor.getColumnIndexOrThrow(Student.COL_DATAOFBIRTH));
+
+                Student student = new Student(id, name, family, dateOfBirth);
+                students.add(student);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return students;
+    }
+
+
+
+    public boolean deleteStudent(int studentId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsAffected = db.delete(Student.TABLE_NAME, Student.COL_ID + " = ?", new String[]{String.valueOf(studentId)});
+        return rowsAffected > 0;
+    }
+
 
 
 

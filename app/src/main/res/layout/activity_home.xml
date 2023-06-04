@@ -186,6 +186,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/ShowStudents"
         android:layout_width="298dp"
         android:layout_height="55dp"
         android:layout_marginBottom="16dp"

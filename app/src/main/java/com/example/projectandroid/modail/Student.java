@@ -29,6 +29,8 @@ public class Student implements Serializable {
         this.dateofbirth = dateofbirth;
 
     }
+    public Student(){}
+
 
     public int getId() {
         return id;

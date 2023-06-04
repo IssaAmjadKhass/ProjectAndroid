@@ -1,6 +1,5 @@
 package com.example.projectandroid.dpHelpr;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,10 +12,7 @@ import com.example.projectandroid.modail.Accounts;
 import com.example.projectandroid.modail.Student;
 import com.example.projectandroid.modail.Supject;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -199,7 +195,7 @@ public String getUserName() {
     public ArrayList<Student> getAllStudents (String name1) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Student> students = new ArrayList<>();
-        String query = "SELECT * FROM " + Student.TABLE_NAME +" WHERE " + Supject.COL_SUBJECT + " LIKE '%' || ? || '%' ";
+        String query = "SELECT * FROM " + Student.TABLE_NAME +" WHERE " + Student.COL_NAME+ " LIKE '%' || ? || '%' ";
         Cursor cursor = db.rawQuery(query,  new String[]{name1});
         if (cursor.moveToFirst()) {
             do {
@@ -215,7 +211,18 @@ public String getUserName() {
         cursor.close();
         return students;
     }
+    public ArrayList<Student> displayAllStudents() {
+        ArrayList<Student> students = getAllStudents("");
 
+        for (Student student : students) {
+            System.out.println("Student ID: " + student.getId());
+            System.out.println("Name: " + student.getName());
+            System.out.println("Family: " + student.getFamily());
+            System.out.println("Date of Birth: " + student.getDateofbirth());
+            System.out.println("-------------------------------------");
+        }
+        return students;
+    }
 
 
     public boolean deleteStudent(int studentId) {

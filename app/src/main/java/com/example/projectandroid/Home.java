@@ -30,6 +30,14 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
         recyclerView = findViewById(R.id.recaicle);
+        binding.ShowStudents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),ShowStudents.class);
+                startActivity(intent);
+            }
+        });
+
 
         String userName = getIntent().getStringExtra("userName");
         String email = getIntent().getStringExtra("email");

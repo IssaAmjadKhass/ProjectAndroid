@@ -12,6 +12,9 @@
         android:theme="@style/Theme.ProjectAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".ShowStudents"
+            android:exported="false" />
+        <activity
             android:name=".Days"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
         </activity>
         <activity
             android:name=".Month"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Add_Student"
             android:exported="false" />
@@ -43,7 +46,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -33,10 +33,8 @@ public class Home extends AppCompatActivity {
 
         String userName = getIntent().getStringExtra("userName");
         String email = getIntent().getStringExtra("email");
-        TextView userNameTextView = findViewById(R.id.username);
-        TextView emailTextView = findViewById(R.id.email);
-        binding.username.setText(userNameTextView.getText());
-        binding.email.setText(emailTextView.getText());
+        binding.username.setText(userName);
+        binding.email.setText(email);
 
         dbHelper = new DbHelper(this); // تهيئة الكائن DbHelper
 
@@ -106,6 +104,7 @@ public class Home extends AppCompatActivity {
             public void onClick(Supject supject) {
 
                 Intent intent = new Intent(getApplicationContext(),Month.class);
+                intent.putExtra("subjectId",supject.getId());
                 startActivity(intent);
             }
         });

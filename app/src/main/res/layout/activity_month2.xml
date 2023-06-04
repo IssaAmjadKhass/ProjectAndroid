@@ -3,9 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/men22"
     android:layout_height="match_parent"
-    tools:context=".Month2">
+    tools:context=".Days">
 
+    <TextView
+        android:id="@+id/today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      android:textColor="@color/black"
+        android:textSize="@dimen/_20ssp"
+
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="412dp"
@@ -14,14 +27,15 @@
         android:layout_marginTop="120dp"
         android:orientation="horizontal"
         android:gravity="center"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recaicle2"
+            android:id="@+id/cornner2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

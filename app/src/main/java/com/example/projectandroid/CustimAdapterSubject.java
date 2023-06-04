@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectandroid.modail.Days1;
 import com.example.projectandroid.modail.Supject;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class CustimAdapterSubject extends RecyclerView.Adapter<CustimAdapterSubj
             tv_55 = itemView.findViewById(R.id.tv_55);
 
             imj = itemView.findViewById(R.id.imj);
-            corner=itemView.findViewById(R.id.corner);
+            corner = itemView.findViewById(R.id.corner);
 
         }
     }

@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean rememberMe;
 
     SharedPreferences preferences;
+    String userName;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         databaseHelper = new DbHelper(this);
         preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+
+        userName=getIntent().getStringExtra("userName");
+        email=getIntent().getStringExtra("email");
 
         if (preferences.getBoolean("ddd", false)) {
             Intent intent = new Intent(getApplicationContext(), Home.class);
@@ -66,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
                     String email = databaseHelper.getEmail();
 
                     Intent intent = new Intent(getApplicationContext(), Home.class);
-                    intent.putExtra("userName", getIntent().getStringExtra("userName"));
-                    intent.putExtra("email", getIntent().getStringExtra("email"));
+                    intent.putExtra("userName",userName );
+                    intent.putExtra("email", email);
                     startActivity(intent);
                     finish();
                 } else {

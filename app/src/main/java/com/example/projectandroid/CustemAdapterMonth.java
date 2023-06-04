@@ -38,7 +38,7 @@ public class CustemAdapterMonth extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View view1 = LayoutInflater.from(context).inflate(R.layout.item_manth,viewGroup,false);
-       TextView  name = view1.findViewById(R.id.tv_month);
+       TextView  name = view1.findViewById(R.id.tvMonth);
        name.setText(data.get(i).getMonth());
         return view1;
 

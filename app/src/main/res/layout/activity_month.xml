@@ -10,7 +10,7 @@
     tools:context=".Month">
 
     <ListView
-        android:id="@+id/lv22"
+        android:id="@+id/lvMonth"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"

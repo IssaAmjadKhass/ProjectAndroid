@@ -61,7 +61,13 @@ public class Home extends AppCompatActivity {
             }
         });
 
-
+binding.AddStudent.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(getApplicationContext(),Add_Student.class);
+        startActivity(intent);
+    }
+});
     }
 
     @Override
@@ -112,4 +118,6 @@ public class Home extends AppCompatActivity {
        recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapterSubject);
     }
+
+
 }

@@ -38,4 +38,29 @@
             android:orientation="vertical"
             />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="اجمالي نسبة الحضور لهذا اليوم من الشهر"
+        android:textSize="@dimen/_20ssp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="148dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/avgStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="76dp"
+        android:textColor="@color/rit"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

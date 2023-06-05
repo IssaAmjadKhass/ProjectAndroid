@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.projectandroid.modail.Accounts;
+import com.example.projectandroid.modail.AttendanceTable;
 import com.example.projectandroid.modail.Student;
 import com.example.projectandroid.modail.Supject;
 
@@ -26,6 +27,8 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(Supject.CREATE_TABLE);
         sqLiteDatabase.execSQL(Accounts.CREATE_TABLE);
         sqLiteDatabase.execSQL(Student.CREATE_TABLE);
+        sqLiteDatabase.execSQL(AttendanceTable.CREATE_TABLE);
+        sqLiteDatabase.execSQL(AttendanceTable.CREATE_TABLE);
 
     }
 
@@ -34,6 +37,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Accounts.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Supject.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Student.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + AttendanceTable.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
@@ -76,21 +80,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.update(Accounts.TABLE_NAME, values, selection, selectionArgs);
     }
 
-//    public boolean isRememberMeEnabled(String username) {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        String[] columns = {Accounts.COL_REMEMBER_ME};
-//        String selection = Accounts.COL_USERNAME + " = ?";
-//        String[] selectionArgs = {username};
-//        Cursor cursor = db.query(Accounts.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
-//        boolean result = false;
-//        if (cursor.moveToFirst()) {
-//            @SuppressLint("Range") int rememberMeValue = cursor.getInt(cursor.getColumnIndex(Accounts.COL_REMEMBER_ME));
-//            result = (rememberMeValue == 1);
-//        }
-//        cursor.close();
-//        return result;
-//    }
-
     public boolean createOrUpdateAccount(String username, String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -100,25 +89,26 @@ public class DbHelper extends SQLiteOpenHelper {
         long rowId = db.insertWithOnConflict(Accounts.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
         return rowId != -1;
     }
-public String getUserName() {
-    SQLiteDatabase db = this.getReadableDatabase();
-    String[] columns = {Accounts.COL_USERNAME};
-    Cursor cursor = db.query(
-            Accounts.TABLE_NAME,
-            columns,
-            null,
-            null,
-            null,
-            null,
-            null
-    );
-    String username = "";
-    if (cursor.moveToFirst()) {
-        username = cursor.getString(cursor.getColumnIndexOrThrow(Accounts.COL_USERNAME));
+
+    public String getUserName() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {Accounts.COL_USERNAME};
+        Cursor cursor = db.query(
+                Accounts.TABLE_NAME,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        String username = "";
+        if (cursor.moveToFirst()) {
+            username = cursor.getString(cursor.getColumnIndexOrThrow(Accounts.COL_USERNAME));
+        }
+        cursor.close();
+        return username;
     }
-    cursor.close();
-    return username;
-}
 
     public String getEmail() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -141,57 +131,50 @@ public String getUserName() {
     }
 
     public boolean insertSubject(String subject) {
-        SQLiteDatabase aa = getWritableDatabase();
-        ContentValues dp = new ContentValues();
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Supject.COL_SUBJECT, subject);
 
-        dp.put(Supject.COL_SUBJECT, String.valueOf(subject));
+        long rowId = db.insert(Supject.TABLE_NAME, null, values);
 
-        long rew = aa.insert(Supject.TABLE_NAME, null, dp);
-
-
-        return rew > 0;
+        return rowId > 0;
     }
 
     public boolean updateSubject(String id, String subject) {
-        SQLiteDatabase aa = getWritableDatabase();
-        ContentValues dp = new ContentValues();
-        dp.put(Supject.COL_SUBJECT, String.valueOf(subject));
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Supject.COL_SUBJECT, subject);
 
-        int rowId = aa.update(Supject.TABLE_NAME, dp, Supject.COL_ID + "=?", new String[]{id});
+        int rowId = db.update(Supject.TABLE_NAME, values, Supject.COL_ID + "=?", new String[]{id});
         return rowId > 0;
     }
 
     public boolean deleteSubject(String id) {
-        SQLiteDatabase dp = getWritableDatabase();
-        int rowId = dp.delete(Supject.TABLE_NAME, Supject.COL_ID + "=?", new String[]{id});
+        SQLiteDatabase db = getWritableDatabase();
+        int rowId = db.delete(Supject.TABLE_NAME, Supject.COL_ID + "=?", new String[]{id});
         return rowId > 0;
     }
 
     public ArrayList<Supject> getAllSubject() {
-        SQLiteDatabase dp = getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         ArrayList<Supject> data = new ArrayList<>();
-        String qouery = "SELECT * FROM " + Supject.TABLE_NAME + " ORDER BY " + Supject.COL_ID + " DESC";
-        Cursor cursor = dp.rawQuery(qouery, null);
+        String query = "SELECT * FROM " + Supject.TABLE_NAME + " ORDER BY " + Supject.COL_ID + " DESC";
+        Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
-
             do {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(Supject.COL_ID));
                 String title = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_SUBJECT));
-
                 String time = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_TIME));
                 Supject supject = new Supject(id, title, time);
                 data.add(supject);
             } while (cursor.moveToNext());
             cursor.close();
-
         }
         return data;
     }
 
-
-
     public boolean insertStudent(Student student) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Student.COL_NAME, student.getName());
         values.put(Student.COL_FAMILY, student.getFamily());
@@ -199,14 +182,14 @@ public String getUserName() {
 
         long rowId = db.insert(Student.TABLE_NAME, null, values);
 
-        return rowId >0;
+        return rowId > 0;
     }
 
-    public ArrayList<Student> getAllStudents (String name1) {
-        SQLiteDatabase db = this.getReadableDatabase();
+    public ArrayList<Student> getAllStudents(String name1) {
+        SQLiteDatabase db = getReadableDatabase();
         ArrayList<Student> students = new ArrayList<>();
-        String query = "SELECT * FROM " + Student.TABLE_NAME +" WHERE " + Student.COL_NAME+ " LIKE '%' || ? || '%' ";
-        Cursor cursor = db.rawQuery(query,  new String[]{name1});
+        String query = "SELECT * FROM " + Student.TABLE_NAME + " WHERE " + Student.COL_NAME + " LIKE '%' || ? || '%' ";
+        Cursor cursor = db.rawQuery(query, new String[]{name1});
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(Student.COL_ID));
@@ -221,6 +204,7 @@ public String getUserName() {
         cursor.close();
         return students;
     }
+
     public ArrayList<Student> displayAllStudents() {
         ArrayList<Student> students = getAllStudents("");
 
@@ -234,14 +218,22 @@ public String getUserName() {
         return students;
     }
 
-
     public boolean deleteStudent(int studentId) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         int rowsAffected = db.delete(Student.TABLE_NAME, Student.COL_ID + " = ?", new String[]{String.valueOf(studentId)});
         return rowsAffected > 0;
     }
 
+    public void addAttendancePercentage(float attendancePercentage) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(AttendanceTable.COLUMN_ATTENDANCE_PERCENTAGE, attendancePercentage);
 
+        db.update(AttendanceTable.TABLE_NAME, values, null, null);
 
-
+        db.close();
+    }
 }
+
+
+

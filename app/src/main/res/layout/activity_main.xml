@@ -63,7 +63,7 @@
 
     <TextView
 
-        android:id="@+id/tv1"
+        android:id="@+id/tvRejester"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="456dp"

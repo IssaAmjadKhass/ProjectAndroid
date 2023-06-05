@@ -30,16 +30,18 @@ public class MainActivity extends AppCompatActivity {
         databaseHelper = new DbHelper(this);
         preferences = getSharedPreferences("myPref", Context.MODE_PRIVATE);
 
-        userName=getIntent().getStringExtra("userName");
-        email=getIntent().getStringExtra("email");
+        userName = preferences.getString("userName", "");
+        email = preferences.getString("email", "");
 
-        if (preferences.getBoolean("ddd", false)) {
+        if (preferences.getBoolean("ddd", false) && !userName.isEmpty()) {
             Intent intent = new Intent(getApplicationContext(), Home.class);
+            intent.putExtra("userName", userName);
+            intent.putExtra("email", email);
             startActivity(intent);
-
+            finish();
         }
 
-        binding.tv1.setOnClickListener(new View.OnClickListener() {
+        binding.tvRejester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Rejester.class);
@@ -70,9 +72,14 @@ public class MainActivity extends AppCompatActivity {
 
                     String email = databaseHelper.getEmail();
 
+                    // حفظ قيمة اسم المستخدم والبريد الإلكتروني في SharedPreferences
+                    SharedPreferences.Editor editor = preferences.edit();
+
+
                     Intent intent = new Intent(getApplicationContext(), Home.class);
-                    intent.putExtra("userName",userName );
+                    intent.putExtra("userName", userName);
                     intent.putExtra("email", email);
+                    startActivity(intent);
                     startActivity(intent);
                     finish();
                 } else {

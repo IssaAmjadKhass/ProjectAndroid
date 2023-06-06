@@ -36,13 +36,13 @@ public class StudetsName extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addAttendance();
+                finish();
 
             }
         });
     }
 
     private void addAttendance() {
-        // ... الأكواد الأخرى لـ addAttendance
 
         // حساب نسبة الحضور
         int totalStudents = data.size();

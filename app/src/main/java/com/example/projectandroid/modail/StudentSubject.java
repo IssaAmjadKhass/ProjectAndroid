@@ -1,4 +1,4 @@
-package com.example.projectandroid;
+package com.example.projectandroid.modail;
 
 import com.example.projectandroid.modail.Student;
 import com.example.projectandroid.modail.Supject;

@@ -74,7 +74,7 @@ public class CustemShowStudent extends RecyclerView.Adapter<CustemShowStudent.My
         }
     }
 
-    interface onItemClickListener {
+    public interface onItemClickListener {
 
 
         void onItemDeleteClick(int id, int position);

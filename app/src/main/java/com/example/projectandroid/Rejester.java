@@ -46,8 +46,8 @@ public class Rejester extends AppCompatActivity {
                 boolean isAccountCreated = databaseHelper.createAccount(userName, email, password);
                 if (isAccountCreated) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("userName", userName); // استبدل userName بالمتغير الذي يحتوي على اسم المستخدم
-                    intent.putExtra("email", email); // استبدل email بالمتغير الذي يحتوي على البريد الإلكتروني
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("email", email);
                     startActivity(intent);
                     finish();
                 } else {

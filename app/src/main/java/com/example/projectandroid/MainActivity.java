@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
                     String email = databaseHelper.getEmail();
 
-                    // حفظ قيمة اسم المستخدم والبريد الإلكتروني في SharedPreferences
+
                     SharedPreferences.Editor editor = preferences.edit();
 
 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Handle "Remember Me" checkbox state
+
         binding.Rb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

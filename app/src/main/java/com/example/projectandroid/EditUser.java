@@ -62,7 +62,6 @@ public class EditUser extends AppCompatActivity {
                     DbHelper dbHelper = new DbHelper(getApplicationContext());
                     boolean isSuccess = dbHelper.createOrUpdateAccount(newUserName, newEmail, newPassword);
                     if (isSuccess) {
-                        // تحديث قيم اسم المستخدم والبريد الإلكتروني في SharedPreferences
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("userName", newUserName);
                         editor.putString("email", newEmail);
@@ -73,7 +72,6 @@ public class EditUser extends AppCompatActivity {
                         intent.putExtra("email", newEmail);
                         startActivity(intent);
                     } else {
-                        // Handle account creation or update failure
                     }
                 }
             }

@@ -47,7 +47,6 @@ public class Add_Student extends AppCompatActivity {
                 String family = name2.getText().toString();
                 String dateOfBirth = datat.getText().toString();
 
-                // التحقق من صحة إدخال البيانات
                 if (name.isEmpty() || family.isEmpty() || dateOfBirth.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "يرجى إدخال جميع البيانات", Toast.LENGTH_SHORT).show();
                 } else {

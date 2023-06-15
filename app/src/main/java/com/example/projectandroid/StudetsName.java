@@ -50,10 +50,8 @@ public class StudetsName extends AppCompatActivity {
         int presentStudents = custumNameStudent.getSelectedStudents().size();
         float attendancePercentage = (presentStudents / (float) totalStudents) * 100;
 
-        // تخزين نسبة الحضور في قاعدة البيانات باستخدام دالة addAttendancePercentage() في dbHelper
         dbHelper.addAttendancePercentage(attendancePercentage);
 
-        // انتقال إلى شاشة الأيام وتمرير نسبة الحضور كمعطى إضافي (extra) في ال Intent
 
         Intent intent = new Intent(getApplicationContext(), Days.class);
         intent.putExtra("attendancePercentage", attendancePercentage);

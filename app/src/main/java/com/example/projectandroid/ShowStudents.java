@@ -57,7 +57,6 @@ CustemShowStudent custemShowStudent;
 
             @Override
             public void onClick(Student student) {
-                // تنفيذ الإجراء عند النقر على الطالب
             }
         });
         GridLayoutManager manager = new GridLayoutManager(this,1);

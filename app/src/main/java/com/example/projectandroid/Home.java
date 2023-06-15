@@ -22,7 +22,7 @@ public class Home extends AppCompatActivity {
     DbHelper dbHelper;
     RecyclerView recyclerView;
     CustimAdapterSubject adapterSubject;
-    boolean info =true;
+    boolean info = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class Home extends AppCompatActivity {
         binding.ShowStudents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),ShowStudents.class);
+                Intent intent = new Intent(getApplicationContext(), ShowStudents.class);
                 startActivity(intent);
             }
         });
@@ -44,12 +44,8 @@ public class Home extends AppCompatActivity {
         binding.username.setText(userName);
         binding.email.setText(email);
 
-        dbHelper = new DbHelper(this); // تهيئة الكائن DbHelper
+        dbHelper = new DbHelper(this);
 
-//        boolean rememberMeEnabled = dbHelper.isRememberMeEnabled(userName);
-//        if (rememberMeEnabled) {
-//            // استرداد البيانات المطلوبة وعرضها في واجهة المستخدم
-//        }
 
         binding.ll1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,32 +65,32 @@ public class Home extends AppCompatActivity {
             }
         });
 
-binding.AddStudent.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(getApplicationContext(),Add_Student.class);
-        startActivity(intent);
-    }
-});
+        binding.AddStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Add_Student.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        dbHelper=new DbHelper(this);
-        ArrayList<Supject>data = dbHelper.getAllSubject();
-        adapterSubject=new CustimAdapterSubject(this, data, new CustimAdapterSubject.onItemClickListener() {
+        dbHelper = new DbHelper(this);
+        ArrayList<Supject> data = dbHelper.getAllSubject();
+        adapterSubject = new CustimAdapterSubject(this, data, new CustimAdapterSubject.onItemClickListener() {
             @Override
             public void onItemDeleteClick(int id, int position) {
 
-                if (info){
+                if (info) {
                     AlertDialog.Builder daialog = new AlertDialog.Builder(Home.this);
                     daialog.setTitle("حذف الماده");
                     daialog.setMessage("هل انته متاكد من حذف الماده");
                     daialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            if (dbHelper.deleteSubject(String.valueOf(id))){
+                            if (dbHelper.deleteSubject(String.valueOf(id))) {
                                 data.remove(position);
                                 adapterSubject.notifyItemRemoved(position);
                             }
@@ -117,13 +113,13 @@ binding.AddStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(Supject supject) {
 
-                Intent intent = new Intent(getApplicationContext(),Month.class);
-                intent.putExtra("subjectId",supject.getId());
+                Intent intent = new Intent(getApplicationContext(), Month.class);
+                intent.putExtra("subjectId", supject.getId());
                 startActivity(intent);
             }
         });
-        GridLayoutManager manager = new GridLayoutManager(this,2);
-       recyclerView.setLayoutManager(manager);
+        GridLayoutManager manager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapterSubject);
     }
 

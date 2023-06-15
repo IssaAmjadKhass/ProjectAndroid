@@ -74,7 +74,7 @@ public class CustimAdapterSubject extends RecyclerView.Adapter<CustimAdapterSubj
         }
     }
 
-    interface onItemClickListener {
+    public interface onItemClickListener {
 
 
         void onItemDeleteClick(int id, int position);

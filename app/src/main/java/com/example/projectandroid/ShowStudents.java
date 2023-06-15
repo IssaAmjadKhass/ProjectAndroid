@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.projectandroid.Cutame.CustemShowStudent;
 import com.example.projectandroid.dpHelpr.DbHelper;
 import com.example.projectandroid.modail.Student;
+import com.example.projectandroid.modail.StudentSubject;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,8 @@ CustemShowStudent custemShowStudent;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_students);
+
+
 
         recyclerView = findViewById(R.id.recaicleShowStudent);
         dbHelper = new DbHelper(this);
@@ -57,6 +61,13 @@ CustemShowStudent custemShowStudent;
 
             @Override
             public void onClick(Student student) {
+                int subjectId = student.getSubjectId();
+                String subjectName = dbHelper.getSubjectName(subjectId);
+                String studentName = student.getName(); // استلام اسم الطالب
+                Intent intent = new Intent(getApplicationContext(), Detaies_Student.class);
+                intent.putExtra("subjectName", subjectName); // إرسال اسم المادة
+                intent.putExtra("studentName", studentName); // إرسال اسم الطالب
+                startActivity(intent);
             }
         });
         GridLayoutManager manager = new GridLayoutManager(this,1);

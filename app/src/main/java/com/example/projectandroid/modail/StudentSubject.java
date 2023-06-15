@@ -6,56 +6,47 @@ import com.example.projectandroid.modail.Supject;
 import java.io.Serializable;
 
 import javax.security.auth.Subject;
-
-public class StudentSubject  {
+public class StudentSubject implements Serializable {
     private int id;
-    private int Student_id;
-    private int Subjects_id;
+    private int studentId;
+    private int subjectId;
 
-
-    public static final String TABLE_NAME = "Subject_Student";
+    public static final String TABLE_NAME = "STUDENT_SUBJECT";
     public static final String COL_ID = "id";
-    public static final String COL_Student_id = "student_id";
-    public static final String COL_Subjects_id = "subjects_id";
+    public static final String COL_STUDENT_ID = "student_id";
+    public static final String COL_SUBJECT_ID = "subject_id";
 
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
             "(" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            COL_Student_id + " INTEGER," +
-            COL_Subjects_id + " INTEGER" +
-            "FOREIGN KEY (" + COL_Student_id + ")" +
-            " REFERENCES " + Student.TABLE_NAME + " (" + Student.COL_ID + ") ON DELETE CASCADE ON UPDATE NO ACTION,"
-            + "FOREIGN KEY (" + COL_Subjects_id + ")" +
-            " REFERENCES " + Supject.TABLE_NAME + " (" + Supject.COL_ID + ") ON DELETE CASCADE ON UPDATE NO ACTION)";
+            COL_STUDENT_ID + " INTEGER," +
+            COL_SUBJECT_ID + " INTEGER," +
+            "FOREIGN KEY(" + COL_STUDENT_ID + ") REFERENCES " + Student.TABLE_NAME + "(" + Student.COL_ID + ")," +
+            "FOREIGN KEY(" + COL_SUBJECT_ID + ") REFERENCES " + Supject.TABLE_NAME + "(" + Supject.COL_ID + "))";
 
-
-    public StudentSubject(int id, int student_id, int subjects_id) {
+    public StudentSubject(int id, int studentId, int subjectId) {
         this.id = id;
-        Student_id = student_id;
-        Subjects_id = subjects_id;
+        this.studentId = studentId;
+        this.subjectId = subjectId;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getStudentId() {
+        return studentId;
     }
 
-    public int getStudent_id() {
-        return Student_id;
+    public int getSubjectId() {
+        return subjectId;
     }
 
-    public void setStudent_id(int student_id) {
-        Student_id = student_id;
+    @Override
+    public String toString() {
+        return "StudentSubject{" +
+                "id=" + id +
+                ", studentId=" + studentId +
+                ", subjectId=" + subjectId +
+                '}';
     }
-
-    public int getSubjects_id() {
-        return Subjects_id;
-    }
-
-    public void setSubjects_id(int subjects_id) {
-        Subjects_id = subjects_id;
-    }
-
 }

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.example.projectandroid.modail.Accounts;
 import com.example.projectandroid.modail.AttendanceTable;
 import com.example.projectandroid.modail.Student;
+import com.example.projectandroid.modail.StudentSubject;
 import com.example.projectandroid.modail.Supject;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(Accounts.CREATE_TABLE);
         sqLiteDatabase.execSQL(Student.CREATE_TABLE);
         sqLiteDatabase.execSQL(AttendanceTable.CREATE_TABLE);
-        sqLiteDatabase.execSQL(AttendanceTable.CREATE_TABLE);
+        sqLiteDatabase.execSQL(StudentSubject.CREATE_TABLE);
 
     }
 
@@ -38,6 +39,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Supject.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Student.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + AttendanceTable.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + StudentSubject.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
@@ -172,6 +174,33 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         return data;
     }
+    public float getAttendancePercentage(int subjectId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        float attendancePercentage = 0.0f;
+        String selectQuery = "SELECT " + AttendanceTable.COLUMN_ATTENDANCE_PERCENTAGE + " FROM " +
+                AttendanceTable.TABLE_NAME + " WHERE " + AttendanceTable.COLUMN_SUBJECT_ID + " = " + subjectId;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            attendancePercentage = cursor.getFloat(cursor.getColumnIndexOrThrow(AttendanceTable.COLUMN_ATTENDANCE_PERCENTAGE));
+        }
+        cursor.close();
+        return attendancePercentage;
+    }
+
+    public String getSubjectName(int subjectId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String subjectName = "";
+        String selectQuery = "SELECT " + Supject.COL_SUBJECT + " FROM " + Supject.TABLE_NAME +
+                " WHERE " + Supject.COL_ID + " = " + subjectId;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            subjectName = cursor.getString(cursor.getColumnIndexOrThrow(Supject.COL_SUBJECT));
+        }
+        cursor.close();
+        return subjectName;
+    }
 
     public boolean insertStudent(Student student) {
         SQLiteDatabase db = getWritableDatabase();
@@ -197,7 +226,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 String family = cursor.getString(cursor.getColumnIndexOrThrow(Student.COL_FAMILY));
                 String dateOfBirth = cursor.getString(cursor.getColumnIndexOrThrow(Student.COL_DATAOFBIRTH));
 
-                Student student = new Student(id, name, family, dateOfBirth);
+                Student student = new Student(id, name, family, dateOfBirth,0);
                 students.add(student);
             } while (cursor.moveToNext());
         }

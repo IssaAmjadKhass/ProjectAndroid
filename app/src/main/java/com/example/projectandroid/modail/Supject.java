@@ -24,6 +24,12 @@ public class Supject implements Serializable {
         this.subject = subject;
         this.time = time;
     }
+    public float getPresencePercentage() {
+        // قم بتنفيذ العمليات اللازمة لحساب نسبة الحضور هنا
+        // يمكنك استخدام قاعدة البيانات أو البيانات المتاحة لحساب النسبة
+        // قم بإرجاع النسبة كقيمة من هذه الدالة
+        return 0.0f;
+    }
 
     public int getId() {
         return id;
@@ -45,4 +51,6 @@ public class Supject implements Serializable {
                 ", time='" + time + '\'' +
                 '}';
     }
+
+
 }

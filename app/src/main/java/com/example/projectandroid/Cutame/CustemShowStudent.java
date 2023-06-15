@@ -1,4 +1,4 @@
-package com.example.projectandroid;
+package com.example.projectandroid.Cutame;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectandroid.R;
 import com.example.projectandroid.modail.Student;
-import com.example.projectandroid.modail.Supject;
 
 import java.util.ArrayList;
 

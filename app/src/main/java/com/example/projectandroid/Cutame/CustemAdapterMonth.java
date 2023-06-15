@@ -1,4 +1,4 @@
-package com.example.projectandroid;
+package com.example.projectandroid.Cutame;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.projectandroid.Month1;
+import com.example.projectandroid.R;
 import com.example.projectandroid.modail.Supject;
 
 import java.util.ArrayList;

@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.example.projectandroid.Cutame.CustemShowStudent;
 import com.example.projectandroid.dpHelpr.DbHelper;
 import com.example.projectandroid.modail.Student;
-import com.example.projectandroid.modail.Supject;
 
 import java.util.ArrayList;
 

@@ -9,8 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
+import com.example.projectandroid.Cutame.CustimAdapterSubject;
 import com.example.projectandroid.databinding.ActivityHomeBinding;
 import com.example.projectandroid.dpHelpr.DbHelper;
 import com.example.projectandroid.modail.Supject;

@@ -1,4 +1,4 @@
-package com.example.projectandroid;
+package com.example.projectandroid.Cutame;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectandroid.R;
 import com.example.projectandroid.modail.Student;
 
 import java.util.ArrayList;

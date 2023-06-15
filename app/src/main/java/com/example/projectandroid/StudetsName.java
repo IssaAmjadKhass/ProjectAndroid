@@ -1,9 +1,11 @@
 package com.example.projectandroid;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,8 +38,28 @@ public class StudetsName extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addAttendance();
-                finish();
+                AlertDialog.Builder daialog = new AlertDialog.Builder(StudetsName.this);
+                daialog.setTitle("تسجيل الحضور");
+                daialog.setMessage("هل انته متاكد من تسجيل الحضور");
+                daialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        daialog.setCancelable(false);
+                        daialog.show();
+                        addAttendance();
+                        finish();
+                    }
+                });
+                daialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                daialog.setCancelable(false);
+                daialog.show();
+
 
             }
         });

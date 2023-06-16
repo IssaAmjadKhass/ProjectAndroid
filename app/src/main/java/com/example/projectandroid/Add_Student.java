@@ -44,16 +44,15 @@ public class Add_Student extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(studentAdapter);
 
-        Spinner subjectSpinner = findViewById(R.id.subjectSpinner);
-        subjectSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, data));
 
-// قم بتهيئة الـ Spinner وتعيين قائمة المواد المتاحة للاختيار
+
+
+
 
         addStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // قم بالحصول على القيمة المختارة من حقل الاختيار
-                Supject selectedSubject = (Supject) subjectSpinner.getSelectedItem();
+
 
                 String name = name1.getText().toString();
                 String family = name2.getText().toString();
@@ -62,7 +61,7 @@ public class Add_Student extends AppCompatActivity {
                 if (name.isEmpty() || family.isEmpty() || dateOfBirth.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "يرجى إدخال جميع البيانات", Toast.LENGTH_SHORT).show();
                 } else {
-                    Student student = new Student(0, name, family, dateOfBirth, selectedSubject.getId());
+                    Student student = new Student(0, name, family, dateOfBirth);
 
                     dbHelper = new DbHelper(getApplicationContext());
                     boolean success = dbHelper.insertStudent(student);

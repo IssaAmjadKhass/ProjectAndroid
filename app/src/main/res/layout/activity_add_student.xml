@@ -7,17 +7,7 @@
     tools:context=".Add_Student">
 
     <!-- تم تعديل هذا العنصر -->
-    <Spinner
-        android:id="@+id/subjectSpinner"
-        android:layout_width="372dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="344dp"
-        android:background="@drawable/meno5"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.589"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:layout_width="wrap_content"

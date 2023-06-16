@@ -226,7 +226,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 String family = cursor.getString(cursor.getColumnIndexOrThrow(Student.COL_FAMILY));
                 String dateOfBirth = cursor.getString(cursor.getColumnIndexOrThrow(Student.COL_DATAOFBIRTH));
 
-                Student student = new Student(id, name, family, dateOfBirth,0);
+                Student student = new Student(id, name, family, dateOfBirth);
                 students.add(student);
             } while (cursor.moveToNext());
         }

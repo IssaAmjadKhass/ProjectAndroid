@@ -23,7 +23,7 @@ public class Student implements Serializable {
             COL_DATAOFBIRTH + " TEXT," +
             COL_SUBJECT_ID + " INTEGER)"; // تضمين حقل معرف المادة في إعلان الجدول
 
-    public Student(int id, String name, String family, String dateofbirth, int subjectId) {
+    public Student(int id, String name, String family, String dateofbirth) {
         this.id = id;
         this.name = name;
         this.family = family;
